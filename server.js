@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "express" ;
+import userRouter from './Routes/user.js'
 
 import { config } from "dotenv";
 
@@ -12,26 +13,20 @@ app.use(bodyParser.json());
 // .evn setup
 config({path:'.env'})
 
-// user Router
-app.use("/api/user",userRouter);
-
-// contact Router 
-app.use('/api/contact',contactRouter)
-
-
 // home route
 app.get("/", (req, res) => {
   res.json({ message: "This is home route working" });
 });
 
-
+//user router
+app.use('/api/user',userRouter)
 
 mongoose
   .connect(process.env.MONGO_URI, {
-    dbName: "NodeJs",
+    dbName: "E-Commerce_API",
   })
   .then(() => console.log("MongoDb Connected..!"))
   .catch((err) => console.log(err));
 
-
+const port = process.env.PORT;
 app.listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`));

@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "express" ;
-import userRouter from './Routes/user.js'
+import userRouter from './Routes/user.js';
+import productRouter from './Routes/product.js'
 
 import { config } from "dotenv";
 
@@ -20,6 +21,9 @@ app.get("/", (req, res) => {
 
 //user router
 app.use('/api/user',userRouter)
+
+//product router
+app.use('/api/product',productRouter)
 
 mongoose
   .connect(process.env.MONGO_URI, {
